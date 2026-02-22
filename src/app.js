@@ -6,6 +6,7 @@ import { logInfo } from './utils/log.js';
 import requestId from './middleware/requestId.js';
 import productsRouter from './modules/products/products.route.js';
 import ordersRouter from './modules/orders/orders.route.js';
+import authRouter from './modules/auth/auth.route.js';
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.get('/boom', (req, res) => {
 
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
+app.use('/auth', authRouter);
 
 // 404 + error handler harus paling bawah
 app.use(notFound);
