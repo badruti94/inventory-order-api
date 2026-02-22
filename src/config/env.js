@@ -3,6 +3,9 @@ import 'dotenv/config';
 if(!process.env.JWT_SECRET){
     throw new Error('JWT_SECRET is required');
 }
+if(!process.env.REFRESH_TOKEN_SECRET){
+    throw new Error('REFRESH_TOKEN_SECRET is required');
+}
 
 const env = {
     nodeEnv: process.env.NODE_ENV ?? 'development',
@@ -19,6 +22,9 @@ const env = {
     jwtSecret: process.env.JWT_SECRET,
     jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '1h',
     bcryptSaltRounds: Number(process.env.BCRYPT_SALT_ROUNDS ?? 10),
+
+    refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
+    refreshTokenExpiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN ?? '7d',
 };
 
 export default env;
