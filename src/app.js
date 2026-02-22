@@ -4,6 +4,7 @@ import notFound from './middleware/notFound.js';
 import errorHandler from './middleware/errorHandler.js';
 import { logInfo } from './utils/log.js';
 import requestId from './middleware/requestId.js';
+import productsRouter from './modules/products/products.route.js';
 
 const app = express();
 
@@ -36,6 +37,8 @@ app.get('/health', (req, res) => {
 app.get('/boom', (req, res) => {
     throw new Error('Boom!');
 });
+
+app.use('/products', productsRouter);
 
 // 404 + error handler harus paling bawah
 app.use(notFound);
