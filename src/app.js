@@ -5,6 +5,7 @@ import errorHandler from './middleware/errorHandler.js';
 import { logInfo } from './utils/log.js';
 import requestId from './middleware/requestId.js';
 import productsRouter from './modules/products/products.route.js';
+import ordersRouter from './modules/orders/orders.route.js';
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.get('/boom', (req, res) => {
 });
 
 app.use('/products', productsRouter);
+app.use('/orders', ordersRouter);
 
 // 404 + error handler harus paling bawah
 app.use(notFound);
