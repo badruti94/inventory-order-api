@@ -44,3 +44,13 @@ export async function revokeAllUserRefreshTokens(userId) {
     const { rows } = await query(sql, [userId], { op: 'revokeAllUserRefreshTokens' });
     return rows;
 }
+
+export async function cleanupRefreshTokens() {
+    const sql = `
+    DELETE FROM refresh_tokens
+    WHERE expires_at <= now()
+        OR revoked_at IS NOT NULL
+    `;
+    const result = await query(sql, [], { op: 'cleanupRefreshTokens' });
+    return result.rowCount;
+}
