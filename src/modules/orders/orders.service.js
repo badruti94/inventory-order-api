@@ -3,7 +3,6 @@ import {withTransaction} from '../../database/tx.js';
 import * as repo from './orders.repository.js';
 
 export async function createOrder({userId, items}) {
-    if(!userId) throw new AppError('userId is required', 400, 'VALIDATION_ERROR');
     if(!Array.isArray(items) || items.length === 0){
         throw new AppError('items must be a non-empty array', 400, 'VALIDATION_ERROR');
     }
