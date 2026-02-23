@@ -25,6 +25,9 @@ const env = {
 
     refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
     refreshTokenExpiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN ?? '7d',
+
+    redisHost: process.env.REDIS_HOST ?? 'redis',
+    redisPort: Number(process.env.REDIS_PORT ?? 6379),
 };
 
 export default env;

@@ -19,7 +19,7 @@ export async function getProductById(id) {
     return rows[0] ?? null;
 }
 
-export async function listProducts({ limit = 10, offset = 0 }) {
+export async function listProducts({ limit, offset }) {
     const sql = `
     SELECT id, name, price, stock, created_at
     FROM products
