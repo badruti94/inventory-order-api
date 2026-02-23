@@ -7,6 +7,7 @@ import requestId from './middleware/requestId.js';
 import productsRouter from './modules/products/products.route.js';
 import ordersRouter from './modules/orders/orders.route.js';
 import authRouter from './modules/auth/auth.route.js';
+import docsRouter from './routes/docs.js';
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
 app.use('/auth', authRouter);
 
+app.use('/docs', docsRouter);
 // 404 + error handler harus paling bawah
 app.use(notFound);
 app.use(errorHandler);
