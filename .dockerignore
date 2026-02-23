@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+.env
+.env.docker
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+scripts
+test.http
