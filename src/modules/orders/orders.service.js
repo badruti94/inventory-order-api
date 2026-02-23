@@ -1,6 +1,7 @@
 import AppError from '../../utils/AppError.js';
 import {withTransaction} from '../../database/tx.js';
 import * as repo from './orders.repository.js';
+import { getChannel } from '../../config/rabbitmq.js';
 
 export async function createOrder({userId, items}) {
     if(!Array.isArray(items) || items.length === 0){
@@ -61,6 +62,19 @@ export async function createOrder({userId, items}) {
                 });
             }
         }
+
+        const channel = getChannel();
+
+        channel.publish(
+            'order.exchange',
+            'order.created',
+            Buffer.from(JSON.stringify({
+                orderId: order.id,
+                userId,
+                totalPrice,
+            })),
+            { persistent: true }
+        );
 
         return {order, items: enriched};
     });

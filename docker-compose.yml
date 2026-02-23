@@ -29,6 +29,17 @@ services:
       interval: 5s
       timeout: 3s
       retries: 20
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: inventory_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
   api:
     build:
       context: .
@@ -41,6 +52,16 @@ services:
       - "3000:3000"
     env_file:
       - .env.docker
+  worker:
+    build:
+      context: .
+    command: node src/worker/orderConsumer.js
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    env_file:
+      - .env.docker
+    restart: unless-stopped
 
 volumes:
   pgdata:

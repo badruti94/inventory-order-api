@@ -1,6 +1,8 @@
 import app from "./app.js";
 import env from "./config/env.js";
 import logger from "./config/logger.js";
+import { initRabbit } from "./config/rabbitmq.js";
+import redis from "./config/redis.js";
 import pool from './database/pool.js';
 
 
@@ -28,6 +30,10 @@ async function start() {
     try {
         await pool.query('SELECT 1');
         logger.info('Database connected');
+
+        await redis.ping();
+
+        await initRabbit();
 
         const server = app.listen(env.port, () => {
             logger.info(`Server running on port ${env.port}`);
