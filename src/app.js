@@ -21,7 +21,7 @@ app.use((req, res, next) => {
     const start = Date.now();
 
     res.on('finish', () => {
-        const durationMs = Date.now - start;
+        const durationMs = Date.now() - start;
         logInfo(req, 'HTTP Request', {
             statusCode: res.statusCode,
             durationMs,
