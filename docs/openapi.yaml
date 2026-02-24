@@ -8,6 +8,8 @@ info:
 
 servers:
   - url: http://localhost:3000
+  - url: http://203.194.115.192:3000
+  - url: https://badru.cloud
 
 tags:
   - name: Auth
