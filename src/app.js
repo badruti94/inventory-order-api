@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 
 // Health check
 app.get('/health', (req, res) => {
-    res.json({ ok: true });
+    res.json({ success: true });
 });
 
 // Simulasi error untuk ngetes centralized handler
