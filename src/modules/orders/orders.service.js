@@ -24,7 +24,7 @@ export async function createOrder({userId, items}) {
         const enriched = [];
         for (const it of items){
             const product = await repo.getProductForUpdate(client, it.productId);
-            if (!product) throw new AppError('Product not found', 404, 'NOT_FOUND');
+            if (!product) throw new AppError('Product not found', 404, 'NOT_FOUND', { productId: it.productId });
 
             if(product.stock < it.quantity){
                 throw new AppError('Insufficient stock', 400, 'INSUFFICIENT_STOCK', {
